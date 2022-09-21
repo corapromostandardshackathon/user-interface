@@ -1,12 +1,10 @@
 <input class="form-control form-control-lg mb-2" type="text" placeholder="Search" aria-label="Search query input">
 
 <ul class="list-group mb-5">
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>In the midst of chaos, there is also opportunity.</span>
-        <i class="bi bi-plus-circle"></i>
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span>The greatest victory is that which requires no battle.</span>
+    <li class="list-group-item d-flex justify-content-between align-items-center" 
+        *ngFor="let result of results"
+        (click)="onAddResult(result)">
+        <span>{{result}}</span>
         <i class="bi bi-plus-circle"></i>
     </li>
 </ul>
