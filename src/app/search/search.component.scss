@@ -1,0 +1,31 @@
+.list-group {
+    .list-group-item {
+        cursor: pointer;
+        text-align: start;
+        transition: all ease-in-out 0.25s;
+
+        &:hover {
+            background-color: #f3f3f3;
+        }
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .form-control {
+        background: rgba(255, 255, 255, 0.3);
+        color: #ffffff;
+        border: none;
+    }
+
+    .list-group {
+        .list-group-item {
+            background-color: rgba(255,255,255, 0.4);
+            border-color: #ffffff;
+            color: #ffffff;
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.5);
+            }
+        }
+    }
+}

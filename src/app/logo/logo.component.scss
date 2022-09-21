@@ -1,0 +1,17 @@
+.logo {
+    display: block;
+    width: 100%;
+}
+
+.dark {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .dark {
+        display: block;
+    }
+    .light {
+        display: none;
+    }
+}

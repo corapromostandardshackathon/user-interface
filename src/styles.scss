@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap');
+
+// Bootstrap Variables
+$font-family-sans-serif: 'Open Sans', sans-serif;
+$font-weight-normal: 300;
+$input-bg: rgba(128,128,128,0.3);
+
+// Bootsrap
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-icons/font/bootstrap-icons";
+
+// Dark/Light mode
+body {
+    color: #000000 !important;
+    background: #f5f6f7 !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: #ffffff !important;
+        background: #000000 !important;
+    }
+}

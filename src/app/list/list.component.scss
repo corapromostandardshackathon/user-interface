@@ -1,0 +1,19 @@
+.btn {
+    font-weight: bold;
+}
+
+.list-group {
+    .list-group-item {
+        background-color: transparent;
+        text-align: start;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .list-group {
+        .list-group-item {
+            border-color: #ffffff;
+            color: #fff;
+        }
+    }
+}
