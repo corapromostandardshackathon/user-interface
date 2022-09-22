@@ -9,9 +9,14 @@ import { Item } from "./item.model"
 export class AppComponent {
   title = 'cora';
 
-  items: Item[] = [
-    new Item("Know yourself and you will win all battles."),
-    new Item("A leader leads by example, not by force."),
-    new Item("Appear weak when you are strong, and strong when you are weak."),
-  ]
+  items: Item[] = []
+
+  ngOnInit(): void {
+    let savedItems = JSON.parse(localStorage.getItem("items"))
+    if (savedItems?.length > 0) {
+      for(let item of savedItems) {
+        this.items.push(new Item(item.name))
+      }
+    }
+  }
 }
