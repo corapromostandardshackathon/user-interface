@@ -17,6 +17,8 @@
 }
 
 .list-group {
+    z-index: 9999;
+    
     .list-group-item {
         cursor: pointer;
         text-align: start;

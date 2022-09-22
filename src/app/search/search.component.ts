@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Item } from "../item.model";
 
@@ -22,7 +23,7 @@ export class SearchComponent implements OnInit {
   ]
   timeout: ReturnType<typeof setTimeout>
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -47,6 +48,7 @@ export class SearchComponent implements OnInit {
 
   handleSearch(): void {
     if (this.query.length > 0) {
+      this.http.get("http://echo.jsontest.com/result/test").subscribe(data => console.log(data))
       this.results = this.data.filter((currentData) => currentData.toLowerCase().includes(this.query.toLowerCase()))
     } else {
       this.results = []
