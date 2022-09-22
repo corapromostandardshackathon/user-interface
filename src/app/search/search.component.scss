@@ -1,3 +1,21 @@
+.form-control {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    &:focus {
+        border: none;
+        box-shadow: none;
+    }
+}
+
+.input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    margin: 0;
+}
+.input-group-text {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: none;
+}
+
 .list-group {
     .list-group-item {
         cursor: pointer;
@@ -15,9 +33,20 @@
         background: rgba(255, 255, 255, 0.3);
         color: #ffffff;
         border: none;
+
+        &:focus {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    }
+
+    .input-group-text {
+        background: rgba(255, 255, 255, 0.3);
+        color: #ffffff;
     }
 
     .list-group {
+        background: #000000;
+
         .list-group-item {
             background-color: rgba(255,255,255, 0.4);
             border-color: #ffffff;
@@ -28,4 +57,5 @@
             }
         }
     }
+
 }

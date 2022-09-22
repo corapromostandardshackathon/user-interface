@@ -20,7 +20,7 @@ export class SearchComponent implements OnInit {
     "In the midst of chaos, there is also opportunity.",
     "The greatest victory is that which requires no battle."
   ]
-  timeout: number
+  timeout: ReturnType<typeof setTimeout>
 
   constructor() { }
 
@@ -38,6 +38,11 @@ export class SearchComponent implements OnInit {
     this.query = query
     clearTimeout(this.timeout)
     this.timeout = setTimeout(() => this.handleSearch(), 500)
+  }
+
+  onClear(): void {
+    this.query = ""
+    this.handleSearch()
   }
 
   handleSearch(): void {

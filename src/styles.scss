@@ -4,6 +4,8 @@
 $font-family-sans-serif: 'Open Sans', sans-serif;
 $font-weight-normal: 300;
 $input-bg: rgba(128,128,128,0.3);
+$bg-light: #f5f6f7;
+$bg-dark: #000000;
 
 // Bootsrap
 @import "~bootstrap/scss/bootstrap";
@@ -12,12 +14,12 @@ $input-bg: rgba(128,128,128,0.3);
 // Dark/Light mode
 body {
     color: #000000 !important;
-    background: #f5f6f7 !important;
+    background: $bg-light;
 }
 
 @media (prefers-color-scheme: dark) {
     body {
         color: #ffffff !important;
-        background: #000000 !important;
+        background: $bg-dark !important;
     }
 }
