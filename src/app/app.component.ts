@@ -8,7 +8,7 @@ import { Item } from "./item.model"
 })
 export class AppComponent {
   title = 'cora';
-
+  isSearching: boolean = false
   items: Item[] = []
 
   ngOnInit(): void {

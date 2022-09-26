@@ -1,58 +1,68 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Item } from "../item.model";
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  @Input() items: Item[]
-  query: string = ""
-  results: string[] = []
-  data: string[] = [
-    "Meets FDA Requirements",
-    "Double Wall Construction For Insulation Of Hot Or Cold Liquids",
-    "Keeps Drinks Hot Or Cold Up To 6 Hours",
-    "Know yourself and you will win all battles.",
-    "A leader leads by example, not by force.",
-    "Appear weak when you are strong, and strong when you are weak.",
-    "In the midst of chaos, there is also opportunity.",
-    "The greatest victory is that which requires no battle."
-  ]
-  timeout: ReturnType<typeof setTimeout>
+    @Input() isSearching: boolean
+    @Output() searchChange = new EventEmitter<boolean>();
+    @Input() items: Item[]
+    query: string = ""
+    results: string[] = []
+    timeout: ReturnType<typeof setTimeout>
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
 
-  ngOnInit(): void {
-  }
-
-  onAddResult(result: string): void {
-    this.query = ""
-    this.results = []
-    this.items.push(new Item(result))
-    localStorage.setItem("items", JSON.stringify(this.items))
-  }
-
-  onChange(query): void {
-    this.query = query
-    clearTimeout(this.timeout)
-    this.timeout = setTimeout(() => this.handleSearch(), 500)
-  }
-
-  onClear(): void {
-    this.query = ""
-    this.handleSearch()
-  }
-
-  handleSearch(): void {
-    if (this.query.length > 0) {
-      this.http.get("http://echo.jsontest.com/result/test").subscribe(data => console.log(data))
-      this.results = this.data.filter((currentData) => currentData.toLowerCase().includes(this.query.toLowerCase()))
-    } else {
-      this.results = []
+    ngOnInit(): void {
     }
-  }
+
+    onAddResult(result: string): void {
+        this.query = ""
+        this.results = []
+        this.items.push(new Item(result))
+        localStorage.setItem("items", JSON.stringify(this.items))
+    }
+
+    onChange(query): void {
+        this.query = query
+        clearTimeout(this.timeout)
+        this.timeout = setTimeout(() => this.handleSearch(), 500)
+    }
+
+    onClear(): void {
+        this.query = ""
+        this.handleSearch()
+    }
+
+    handleSearch(): void {
+        if (this.query.length > 0) {
+            this.isSearching = true
+            this.searchChange.emit(this.isSearching);
+            this.http.get("https://ppds.hitpromo.net/hitOrderManagement/predText/keyH/Hackathon/text/{query}".replace("{query}", this.query)).subscribe((data: []) => {
+                let options = data.map((option) => {
+                    return {
+                        value: this.query + " " + option[0],
+                        probability: option[1]
+                    }
+                })
+
+                let uniqueOptions = options.reduce((prev, curr) => {
+                    if (prev.find(element => element.value == curr.value) === undefined) {
+                        prev.push(curr)
+                    }
+                    return prev;
+                }, [])
+                this.results = uniqueOptions
+                this.isSearching = false
+                this.searchChange.emit(this.isSearching);
+            })
+        } else {
+            this.results = []
+        }
+    }
 
 }
